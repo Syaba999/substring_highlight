@@ -17,21 +17,27 @@ class SubstringHighlight extends StatelessWidget {
   /// The {TextStyle} of the {SubstringHighlight.term}s found.
   final TextStyle textStyleHighlight;
 
-  SubstringHighlight({
-    @required this.text,
-    @required this.term,
-    this.textStyle = const TextStyle(
-      color: Colors.black,
-    ),
-    this.textStyleHighlight = const TextStyle(
-      color: Colors.red,
-    ),
-  });
+  final TextAlign textAlign;
+
+  SubstringHighlight(
+      {@required this.text,
+      @required this.term,
+      this.textStyle = const TextStyle(
+        color: Colors.black,
+      ),
+      this.textStyleHighlight = const TextStyle(
+        color: Colors.red,
+      ),
+      this.textAlign});
 
   @override
   Widget build(BuildContext context) {
     if (term.isEmpty) {
-      return Text(text, style: textStyle);
+      return Text(
+        text,
+        style: textStyle,
+        textAlign: textAlign,
+      );
     } else {
       String termLC = term.toLowerCase();
 
@@ -51,7 +57,10 @@ class SubstringHighlight extends StatelessWidget {
           i += term.length;
         }
       }
-      return RichText(text: TextSpan(children: children));
+      return RichText(
+        text: TextSpan(children: children),
+        textAlign: textAlign,
+      );
     }
   }
 }
